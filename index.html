@@ -1,0 +1,234 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0046)http://digi-tamaring.org/box_anime/index3.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript" ></script>
+ <style>
+* {
+margin: 0;
+padding: 0;
+}
+
+html,body {
+height: 100%;
+}
+
+
+#pages {
+}
+
+#pages section {
+float: left;
+overflow: hidden;
+position: absolute;
+}
+
+#pages section div {
+cursor: pointer;
+margin: 0;
+border: 1px solid #ccc;
+width: 100%;
+height: 100%;
+border-radius: 10px;        /* CSS3���� */  
+    -webkit-border-radius: 10px;    /* Safari,Google Chrome�p */  
+    -moz-border-radius: 10px;   /* Firefox�p */
+background-color: #fff;
+}
+
+#pages section div:hover {
+background-color: #fcfcfc;
+}
+
+
+
+
+
+
+</style>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	var $content = $("#pages");
+	var $box = $content.find('> *');
+	var $boxNoActive = $content.find('> *:not("active")');
+	var linemx = 17;
+	var rowmx = Math.ceil(($box.length)/17);
+	var contentWidth = $content.width();
+	var contentHeight = $(window).height();
+	var boxWidth = contentWidth/linemx;
+	var boxNum = {
+		width : 1,
+		height : 1
+	};
+//	var boxHeight = contentHeight/rowmx;
+	var info = [];
+
+	$box.click(function(){
+
+		info[$(this).index()].boxNum.width = Math.floor(Math.random()*(5-2)+2);
+
+		info[$(this).index()].boxNum.height = Math.floor(Math.random()*(5-2)+2);
+
+		info[$(this).index()].width = boxWidth * info[$(this).index()].boxNum.width;
+		info[$(this).index()].height = boxWidth * info[$(this).index()].boxNum.height;
+		
+		boxSet();
+
+	});
+
+setDefault();
+boxSet();
+
+function boxSet() {
+	$box.each(function(i){
+		$(this).css({
+			left: myInfo(i).left,
+			top: myInfo(i).top,
+			width: myInfo(i).width,
+			height: myInfo(i).height
+		});
+	});
+}
+
+function setDefault() {
+
+	var topPosition = 0;
+	//i = each の回数
+	$box.each(function(i){
+		info[i] = {};
+		info[i].left = i % linemx;
+		if(i != 0 && i % linemx === 0) {
+			topPosition++;
+		}
+		info[i].boxNum = {};
+		info[i].top = topPosition;
+		info[i].boxNum.width = boxNum.width;
+		info[i].boxNum.height = boxNum.height;
+		info[i].width = $(this).width(boxWidth * info[i].boxNum.width).width();
+		info[i].height = $(this).height(boxWidth * info[i].boxNum.height).height();
+		info[i].leftPostion = info[i].left * info[i].width;
+		info[i].topPosition = info[i].top * info[i].height;
+	});
+}
+
+
+function myInfo(num) {
+		var leftPostion = 0;
+		var topPosition = 0;
+		var boxNumWidth = 0;
+		var isPlus = [];
+
+		$box.each(function(i){
+			if(info[num].top === info[i].top && info[num].left > info[i].left) {
+				leftPostion += info[i].width;
+			}
+			else if (num === i) {
+				info[num].leftPostion = leftPostion;
+			}
+
+			if(info[num].left >= info[i].left) {
+				boxNumWidth += info[i].boxNum.width;
+				$(this).addClass("ok");
+			}
+
+			if(boxNumWidth >= info[num].boxNum.width) {
+				isPlus[info[i].top] = true;
+			}
+
+			if(boxNumWidth >= info[num].boxNum.width && isPlus[info[i].top]) {
+				topPosition += info[i].height;
+			}
+			else if (num === i) {
+				info[num].topPosition = topPosition;
+			}
+
+		});
+
+		return {
+			left : info[num].leftPostion,
+			top : info[num].topPosition,
+			width : info[num].width,
+			height : info[num].height
+		}
+}
+
+
+
+});
+
+
+</script>
+
+</head>
+<body style="zoom: 1;">
+<!-- contents Start -->
+<div id="contents">
+<div id="pages">
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	<section><div></div></section>
+	</div>
+</div>
+<!-- contents End --> 
+
+</body></html>
