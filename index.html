@@ -2,6 +2,7 @@
 <!-- saved from url=(0046)http://digi-tamaring.org/box_anime/index3.html -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
+<title>ボックス並べる</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript" ></script>
  <style>
 * {
@@ -48,6 +49,12 @@ background-color: #fcfcfc;
 
 <script type="text/javascript">
 $(document).ready(function() {
+
+	for(var i =0; i <= 100;i++) {
+		$('#pages').append('<section><div>' + i + '</div></section>');
+	};
+
+
 	var $content = $("#pages");
 	var $box = $content.find('> *');
 	var $boxNoActive = $content.find('> *:not("active")');
@@ -73,7 +80,6 @@ $(document).ready(function() {
 		info[$(this).index()].height = boxWidth * info[$(this).index()].boxNum.height;
 		
 		boxSet();
-
 	});
 
 setDefault();
@@ -81,19 +87,18 @@ boxSet();
 
 function boxSet() {
 	$box.each(function(i){
-		$(this).css({
+		$(this).animate({
 			left: myInfo(i).left,
 			top: myInfo(i).top,
 			width: myInfo(i).width,
 			height: myInfo(i).height
-		});
+		},1000);
 	});
 }
 
 function setDefault() {
-
 	var topPosition = 0;
-	//i = each の回数
+	
 	$box.each(function(i){
 		info[i] = {};
 		info[i].left = i % linemx;
@@ -111,37 +116,48 @@ function setDefault() {
 	});
 }
 
-
+//ボックスの位置計算する関数
 function myInfo(num) {
 		var leftPostion = 0;
 		var topPosition = 0;
 		var boxNumWidth = 0;
 		var isPlus = [];
+		var thisBoxNum = leftBoxNum(num);
 
 		$box.each(function(i){
+			//------------------------------------------------------------
+			//	横位置指定
+			//------------------------------------------------------------
+			//自分と同じ高さにいるかつ、自分の前のwidthをたす
 			if(info[num].top === info[i].top && info[num].left > info[i].left) {
 				leftPostion += info[i].width;
-			}
-			else if (num === i) {
+			};
+
+			//------------------------------------------------------------
+			//	縦位置指定
+			//------------------------------------------------------------
+			//自分のボックスの左が何個分かチェック
+			boxNumWidth = leftBoxNum(i);
+
+			//そのラインでまだ高さを足しいない場合に処理を行う
+			if(!isPlus[info[i].top]) {
+				//上から大きさを足していき、自分の上にボックスがある場合そのラインの高さを+する処理を行うために
+				//そのラインの高さをプラスするフラグをtrueにする
+				if(boxNumWidth >= thisBoxNum) {
+					isPlus[info[i].top] = true;
+				};
+	
+				//自分より上のラインでボックスが自分の上にあるボックスの高さをたす
+				if((info[num].top > info[i].top && boxNumWidth >= thisBoxNum) && isPlus[info[i].top]) {
+					topPosition += info[i].height;
+				}
+			};
+			
+			//自分の位置に来た時に今まで足してきた高さ・幅の値をを代入
+			if (num === i) {
 				info[num].leftPostion = leftPostion;
-			}
-
-			if(info[num].left >= info[i].left) {
-				boxNumWidth += info[i].boxNum.width;
-				$(this).addClass("ok");
-			}
-
-			if(boxNumWidth >= info[num].boxNum.width) {
-				isPlus[info[i].top] = true;
-			}
-
-			if(boxNumWidth >= info[num].boxNum.width && isPlus[info[i].top]) {
-				topPosition += info[i].height;
-			}
-			else if (num === i) {
 				info[num].topPosition = topPosition;
 			}
-
 		});
 
 		return {
@@ -152,7 +168,18 @@ function myInfo(num) {
 		}
 }
 
-
+//自分の横ラインの左側のボックスが自分含めて何個分なのかを返す
+function leftBoxNum(num) {
+		var leftBoxNum = 0;
+		$box.each(function(i){
+			//自分と同じ高さにいるかつ、自分より前と自分んのboxの大きさをたす
+			if(info[num].top === info[i].top && info[num].left >= info[i].left) {
+				leftBoxNum += info[i].boxNum.width;
+			}
+		});
+		
+		return leftBoxNum;
+};
 
 });
 
@@ -164,71 +191,10 @@ function myInfo(num) {
 <!-- contents Start -->
 <div id="contents">
 <div id="pages">
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	<section><div></div></section>
-	</div>
+</div>
 </div>
 <!-- contents End --> 
+
+
 
 </body></html>
